@@ -20,7 +20,7 @@ public class BrigadeiroPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brigadeiro_pedido);
 
-        //Lista de opções do spinner na Activity FestaPessoa
+        //Lista de opções do spinner na Activity BrigadeiroPedido
         Spinner festaOuPessoal = (Spinner) findViewById(R.id.festaOuPessoal);
         ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(this,
