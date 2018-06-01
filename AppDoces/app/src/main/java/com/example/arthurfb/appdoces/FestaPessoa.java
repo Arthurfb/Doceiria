@@ -79,13 +79,13 @@ public class FestaPessoa extends AppCompatActivity {
         CheckBox checkChocolateMeioAmargo = (CheckBox) findViewById(R.id.check_chocolate_amargo);
         CheckBox checkChocolateBranco = (CheckBox) findViewById(R.id.check_chocolate_branco);
         CheckBox checkOreo = (CheckBox) findViewById(R.id.check_oreo);
-        if (checkChocolateMeioAmargo.isChecked()) {
+        if (checkChocolateMeioAmargo.isChecked() && !checkChocolateBranco.isChecked() && !checkOreo.isChecked()) {
             casca = "Chocolate Meio Amargo";
         }
-        if (checkChocolateBranco.isChecked()) {
+        if (checkChocolateBranco.isChecked() && !checkChocolateMeioAmargo.isChecked() && !checkOreo.isChecked()) {
             casca = "Chocolate Branco";
         }
-        if (checkOreo.isChecked()) {
+        if (checkOreo.isChecked() && !checkChocolateBranco.isChecked() && !checkChocolateMeioAmargo.isChecked()) {
             casca = "Oreo";
         }
     }
