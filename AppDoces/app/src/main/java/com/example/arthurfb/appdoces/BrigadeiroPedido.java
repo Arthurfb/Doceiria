@@ -44,15 +44,19 @@ public class BrigadeiroPedido extends AppCompatActivity {
             case R.id.radio1_opçao1:
                 if (saborEscolhido)
                     sabor = "KitKat";
+                break;
             case R.id.radio1_opçao2:
                 if (saborEscolhido)
                     sabor = "Oreo";
+                break;
             case R.id.radio1_opçao3:
                 if (saborEscolhido)
                     sabor = "Brigadeiro Tradicional";
+                break;
             case R.id.radio1_opçao4:
                 if (saborEscolhido)
                     sabor = "Churros";
+                break;
             case R.id.radio1_opçao5:
                 if (saborEscolhido)
                     sabor = "Leite Ninho";
@@ -82,7 +86,7 @@ public class BrigadeiroPedido extends AppCompatActivity {
 
         //Envia dados para o email
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.setData(Uri.parse("mailto:arthur.ferreira@souunit.com.br")); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_SUBJECT, "Pedido realizado");
         intent.putExtra(Intent.EXTRA_TEXT, " Contém os seguintes dados:\n" + pedido + "\n" + mensagemDoPreço);
         if (intent.resolveActivity(getPackageManager()) != null) {
