@@ -32,7 +32,6 @@ public class BrigadeiroPedido extends AppCompatActivity {
     }
 
     String sabor;
-    String pedido = "Pediu Brigadeiro";
     int preçoPorBrigadeiro = 1;
     int preçoTotal;
 
@@ -62,6 +61,9 @@ public class BrigadeiroPedido extends AppCompatActivity {
     }
 
     public void pedir(View view) {
+        //Recebe o pedido da activity anterior//
+        Intent intentPedido = getIntent();
+        String pedido = intentPedido.getStringExtra("nome");
 
         //Para saber quantos brigadeiros foram pedidos//
         EditText quantidade_texto = (findViewById(R.id.quantidadeBrigadeiro));

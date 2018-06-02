@@ -44,7 +44,6 @@ public class FestaPessoa extends AppCompatActivity {
 
 
     String sabor;
-    String pedido = "Pediu Ovo De Colher";
     String casca;
     int preçoPorOvo = 25;
     int preçoTotal;
@@ -91,6 +90,9 @@ public class FestaPessoa extends AppCompatActivity {
     }
 
     public void pedir(View view) {
+        //Recebe o pedido da activity anterior//
+        Intent intentPedido = getIntent();
+        String pedido = intentPedido.getStringExtra("nome");
 
         //Para saber quantos brigadeiros foram pedidos//
         EditText quantidade_texto = (findViewById(R.id.quantidadeBrigadeiro));
