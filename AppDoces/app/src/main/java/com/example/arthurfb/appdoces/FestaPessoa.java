@@ -17,13 +17,15 @@ import android.widget.AdapterView;
 public class FestaPessoa extends AppCompatActivity {
     private RadioGroup radioGroup;
 
+    Spinner festaOuPessoal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ovo_colher);
 
         //Lista de opções do spinner na Activity FestaPessoa
-        Spinner festaOuPessoal = (Spinner) findViewById(R.id.festaOuPessoal);
+        festaOuPessoal = (Spinner) findViewById(R.id.festaOuPessoal);
         ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(this,
                         R.array.opçoes_array,
@@ -33,21 +35,10 @@ public class FestaPessoa extends AppCompatActivity {
         festaOuPessoal.setAdapter(adapter);
     }
 
-    /*public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        parent.getItemAtPosition(pos);
-        parent.getSelectedItemId();
-        // parent.getItemAtPosition(pos)
-    }
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    }*/
-
-
+    String pessoalOuFesta;
     String sabor;
     String casca;
-    int preçoPorOvo = 25;
+    int preçoPorOvo;
     int preçoTotal;
 
     //Realiza o pedido//
@@ -96,6 +87,16 @@ public class FestaPessoa extends AppCompatActivity {
     }
 
     public void pedir(View view) {
+        //Decide o preço de acordo com o que foi escolhido no Spinner//
+        int pos2 = festaOuPessoal.getSelectedItemPosition();
+        if (pos2 == 0) {
+            preçoPorOvo = 20;
+            pessoalOuFesta = "Pediu para festa";
+        } else if (pos2 == 1) {
+            preçoPorOvo = 25;
+            pessoalOuFesta = "Pediu para indivíduo";
+        }
+
         //Recebe o pedido da activity anterior//
         Intent intentPedido = getIntent();
         String pedido = intentPedido.getStringExtra("nome");
@@ -114,6 +115,7 @@ public class FestaPessoa extends AppCompatActivity {
         String mensagemDoPreço = "Seu pedido contem: " + quantidadeTextoInt;
         mensagemDoPreço += "\n Sabor: " + sabor;
         mensagemDoPreço += "\n Com a casca de " + casca;
+        mensagemDoPreço += "\n" + pessoalOuFesta;
         mensagemDoPreço += "\n No valor de: " + "R$" + preçoTotal;
 
         //Envia dados para o email

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -15,13 +16,15 @@ import android.widget.Toast;
 
 public class BrigadeiroPedido extends AppCompatActivity {
 
+    Spinner festaOuPessoal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brigadeiro_pedido);
 
         //Lista de opções do spinner na Activity BrigadeiroPedido
-        Spinner festaOuPessoal = (Spinner) findViewById(R.id.festaOuPessoal);
+        festaOuPessoal = (Spinner) findViewById(R.id.festaOuPessoal);
         ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(this,
                         R.array.opçoes_array,
@@ -31,9 +34,10 @@ public class BrigadeiroPedido extends AppCompatActivity {
         festaOuPessoal.setAdapter(adapter);
     }
 
+    String pessoalOuFesta;
     String sabor;
-    int preçoPorBrigadeiro = 1;
-    int preçoTotal;
+    double preçoPorBrigadeiro;
+    double preçoTotal;
 
     //Realiza o pedido//
     public void verificarSabor(View view) {
@@ -65,6 +69,16 @@ public class BrigadeiroPedido extends AppCompatActivity {
     }
 
     public void pedir(View view) {
+        //Decide o preço de acordo com o que foi escolhido no Spinner//
+        int pos2 = festaOuPessoal.getSelectedItemPosition();
+        if (pos2 == 0) {
+            preçoPorBrigadeiro = 0.6;
+            pessoalOuFesta = "Pediu para festa";
+        } else if (pos2 == 1) {
+            preçoPorBrigadeiro = 1;
+            pessoalOuFesta = "Pediu para indivíduo";
+        }
+
         //Recebe o pedido da activity anterior//
         Intent intentPedido = getIntent();
         String pedido = intentPedido.getStringExtra("nome");
@@ -82,6 +96,7 @@ public class BrigadeiroPedido extends AppCompatActivity {
         //Valores que serão inseridos na mensagem enviada ao fornecedor//
         String mensagemDoPreço = "Seu pedido contem: " + quantidadeTextoInt;
         mensagemDoPreço += "\n Sabor: " + sabor;
+        mensagemDoPreço += "\n" + pessoalOuFesta;
         mensagemDoPreço += "\n No valor de: " + "R$" + preçoTotal;
 
         //Envia dados para o email
